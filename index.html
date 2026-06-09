@@ -14,552 +14,118 @@
   --border:rgba(255,255,255,0.15);
 }
 html{scroll-behavior:smooth}
-body{
-  background:#000;
-  color:var(--white);
-  font-family:'Inter',sans-serif;
-  overflow-x:hidden;
-}
-
-/* ===== HERO ===== */
-#hero{
-  position:relative;
-  width:100%;
-  height:100vh;
-  min-height:600px;
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-}
-
-/* Animated data viz canvas background */
-#vizCanvas{
-  position:absolute;
-  inset:0;
-  width:100%;height:100%;
-  z-index:0;
-}
-
-/* Dark cinematic overlay */
-.hero-overlay{
-  position:absolute;
-  inset:0;
-  z-index:1;
-  background:
-    linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.1) 100%),
-    linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
-}
-
-/* Person silhouette */
-.silhouette{
-  position:absolute;
-  right:8%;
-  bottom:0;
-  height:85%;
-  z-index:2;
-  opacity:0.5;
-  display:flex;
-  align-items:flex-end;
-}
-.silhouette svg{
-  height:100%;
-  width:auto;
-}
-
-/* Nav */
-nav{
-  position:relative;
-  z-index:10;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:28px 48px;
-}
-.nav-name{
-  font-family:'Inter',sans-serif;
-  font-size:13px;
-  font-weight:500;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-  color:var(--white);
-}
-.nav-links{
-  display:flex;
-  gap:32px;
-  align-items:center;
-  list-style:none;
-}
-.nav-links a{
-  font-size:11px;
-  font-weight:400;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:var(--muted);
-  text-decoration:none;
-  transition:color 0.25s;
-}
+body{background:#000;color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;}
+#hero{position:relative;width:100%;height:100vh;min-height:600px;display:flex;flex-direction:column;overflow:hidden;}
+#vizCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
+.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.3) 60%,rgba(0,0,0,0.1) 100%),linear-gradient(to top,rgba(0,0,0,0.8) 0%,transparent 50%);}
+.silhouette{position:absolute;right:8%;bottom:0;height:85%;z-index:2;opacity:0.5;display:flex;align-items:flex-end;}
+.silhouette svg{height:100%;width:auto;}
+nav{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:28px 48px;}
+.nav-name{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);}
+.nav-links{display:flex;gap:32px;align-items:center;list-style:none;}
+.nav-links a{font-size:11px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.25s;}
 .nav-links a:hover{color:var(--white)}
-.nav-resume{
-  padding:7px 18px;
-  border:1px solid var(--border);
-  border-radius:2px;
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:var(--white);
-  text-decoration:none;
-  transition:all 0.25s;
-}
-.nav-resume:hover{
-  background:var(--white);
-  color:#000;
-  border-color:var(--white);
-}
-
-/* Hero content */
-.hero-content{
-  position:relative;
-  z-index:5;
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:0 48px 80px;
-  max-width:900px;
-}
-.hero-eyebrow{
-  font-family:'Inter',sans-serif;
-  font-size:11px;
-  letter-spacing:0.2em;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:20px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.hero-eyebrow::before{
-  content:'';
-  width:32px;height:1px;
-  background:var(--gold);
-}
-.hero-title{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(52px,8vw,110px);
-  font-weight:900;
-  line-height:0.92;
-  letter-spacing:-0.01em;
-  text-transform:uppercase;
-  margin-bottom:28px;
-  color:var(--white);
-}
-.hero-title .italic-line{
-  font-style:italic;
-  font-weight:700;
-  color:rgba(255,255,255,0.85);
-  display:block;
-  font-size:0.75em;
-  letter-spacing:0.02em;
-}
-.hero-sub{
-  font-family:'Cormorant Garamond',serif;
-  font-size:18px;
-  font-weight:300;
-  font-style:italic;
-  color:rgba(255,255,255,0.65);
-  line-height:1.6;
-  max-width:480px;
-  margin-bottom:40px;
-  letter-spacing:0.02em;
-}
-.hero-actions{
-  display:flex;
-  gap:16px;
-  align-items:center;
-}
-.ha-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:13px 28px;
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-  text-decoration:none;
-  transition:all 0.3s;
-  font-family:'Inter',sans-serif;
-}
-.ha-primary{
-  background:var(--white);
-  color:#000;
-}
-.ha-primary:hover{background:var(--gold);color:#000}
-.ha-ghost{
-  color:var(--white);
-  border:1px solid var(--border);
-}
-.ha-ghost:hover{border-color:var(--white)}
-
-/* Scroll line */
-.scroll-indicator{
-  position:absolute;
-  bottom:40px;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:10;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
-}
-.scroll-text{
-  font-size:9px;
-  letter-spacing:0.2em;
-  text-transform:uppercase;
-  color:var(--muted);
-  writing-mode:vertical-rl;
-}
-.scroll-bar{
-  width:1px;
-  height:48px;
-  background:linear-gradient(to bottom,rgba(255,255,255,0.5),transparent);
-  animation:scrollPulse 2s ease-in-out infinite;
-}
-@keyframes scrollPulse{
-  0%,100%{opacity:0.3;transform:scaleY(0.6)}
-  50%{opacity:1;transform:scaleY(1)}
-}
-
-/* ===== SECTIONS ===== */
-.section{
-  padding:120px 80px;
-  max-width:1300px;
-  margin:0 auto;
-}
-
-/* About */
-#about{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:100px;
-  align-items:start;
-  border-top:1px solid rgba(255,255,255,0.08);
-}
-.about-label{
-  font-size:10px;
-  letter-spacing:0.2em;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:20px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.about-label::before{content:'';width:24px;height:1px;background:var(--gold)}
-.about-heading{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(36px,4vw,52px);
-  font-weight:700;
-  line-height:1.1;
-  letter-spacing:-0.02em;
-  margin-bottom:32px;
-  color:var(--white);
-}
-.about-text p{
-  font-size:14px;
-  color:rgba(255,255,255,0.55);
-  line-height:1.9;
-  margin-bottom:20px;
-  font-family:'Cormorant Garamond',serif;
-  font-size:17px;
-  font-weight:300;
-}
-.about-text p strong{color:rgba(255,255,255,0.9);font-weight:600;font-style:italic}
-.status-strip{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 16px;
-  border:1px solid rgba(16,185,129,0.3);
-  color:#4ade80;
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  margin-top:8px;
-}
-.pulse{
-  width:6px;height:6px;
-  border-radius:50%;
-  background:#4ade80;
-  animation:gp 2s infinite;
-}
+.nav-resume{padding:7px 18px;border:1px solid var(--border);border-radius:2px;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--white);text-decoration:none;transition:all 0.25s;}
+.nav-resume:hover{background:var(--white);color:#000;border-color:var(--white);}
+.hero-content{position:relative;z-index:5;flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 48px 80px;max-width:900px;}
+.hero-eyebrow{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(52px,8vw,110px);font-weight:900;line-height:0.92;letter-spacing:-0.01em;text-transform:uppercase;margin-bottom:28px;color:var(--white);}
+.hero-title .italic-line{font-style:italic;font-weight:700;color:rgba(255,255,255,0.85);display:block;font-size:0.75em;letter-spacing:0.02em;}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;font-style:italic;color:rgba(255,255,255,0.65);line-height:1.6;max-width:480px;margin-bottom:40px;letter-spacing:0.02em;}
+.hero-actions{display:flex;gap:16px;align-items:center;}
+.ha-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;font-family:'Inter',sans-serif;}
+.ha-primary{background:var(--white);color:#000;}
+.ha-primary:hover{background:var(--gold);color:#000;}
+.ha-ghost{color:var(--white);border:1px solid var(--border);}
+.ha-ghost:hover{border-color:var(--white);}
+.scroll-indicator{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.scroll-text{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;}
+.scroll-bar{width:1px;height:48px;background:linear-gradient(to bottom,rgba(255,255,255,0.5),transparent);animation:scrollPulse 2s ease-in-out infinite;}
+@keyframes scrollPulse{0%,100%{opacity:0.3;transform:scaleY(0.6)}50%{opacity:1;transform:scaleY(1)}}
+.section{padding:120px 80px;max-width:1300px;margin:0 auto;}
+#about{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;border-top:1px solid rgba(255,255,255,0.08);}
+.about-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.about-label::before{content:'';width:24px;height:1px;background:var(--gold);}
+.about-heading{font-family:'Playfair Display',serif;font-size:clamp(36px,4vw,52px);font-weight:700;line-height:1.1;letter-spacing:-0.02em;margin-bottom:32px;color:var(--white);}
+.about-text p{font-size:15px;color:rgba(255,255,255,0.6);line-height:1.85;margin-bottom:16px;font-family:'Cormorant Garamond',serif;font-weight:300;}
+.about-text p strong{color:rgba(255,255,255,0.9);font-weight:600;font-style:italic;}
+.status-strip{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid rgba(16,185,129,0.3);color:#4ade80;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;margin-top:8px;}
+.pulse{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:gp 2s infinite;}
 @keyframes gp{0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,0.5)}50%{box-shadow:0 0 0 6px rgba(74,222,128,0)}}
-
 .about-right{}
-.stat-rows{margin-bottom:48px}
-.stat-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 0;
-  border-bottom:1px solid rgba(255,255,255,0.06);
-}
-.stat-row:first-child{border-top:1px solid rgba(255,255,255,0.06)}
-.stat-label-text{
-  font-size:11px;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,0.4);
-}
-.stat-value-text{
-  font-family:'Playfair Display',serif;
-  font-size:28px;
-  font-weight:700;
-  color:var(--white);
-}
-.stat-value-text small{font-size:14px;color:var(--gold);font-family:'Inter',sans-serif;font-weight:400;margin-left:4px}
-
-/* Skills grid */
-.skills-section{
-  border-top:1px solid rgba(255,255,255,0.08);
-  background:rgba(255,255,255,0.02);
-}
-.skills-inner{
-  max-width:1300px;
-  margin:0 auto;
-  padding:120px 80px;
-}
-.skills-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1px;
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(255,255,255,0.06);
-  margin-top:60px;
-}
-.skill-cell{
-  background:#000;
-  padding:36px 28px;
-  transition:background 0.3s;
-}
-.skill-cell:hover{background:rgba(201,169,110,0.06)}
-.sc-icon{font-size:28px;margin-bottom:16px;display:block}
-.sc-name{
-  font-size:14px;
-  font-weight:600;
-  color:var(--white);
-  letter-spacing:0.02em;
-  margin-bottom:6px;
-}
-.sc-level{
-  font-size:11px;
-  color:rgba(255,255,255,0.35);
-  letter-spacing:0.06em;
-  text-transform:uppercase;
-}
-.sc-bar{
-  height:1px;
-  background:rgba(255,255,255,0.08);
-  margin-top:16px;
-  position:relative;
-}
-.sc-fill{
-  position:absolute;
-  left:0;top:0;height:100%;
-  background:var(--gold);
-  animation:sfill 2s ease-out forwards;
-  transform-origin:left;
-  transform:scaleX(0);
-}
+.stat-rows{margin-bottom:48px;}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.stat-row:first-child{border-top:1px solid rgba(255,255,255,0.06);}
+.stat-label-text{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);}
+.stat-value-text{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--white);}
+.stat-value-text small{font-size:14px;color:var(--gold);font-family:'Inter',sans-serif;font-weight:400;margin-left:4px;}
+.skills-section{border-top:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);}
+.skills-inner{max-width:1300px;margin:0 auto;padding:120px 80px;}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);margin-top:60px;}
+.skill-cell{background:#000;padding:36px 28px;transition:background 0.3s;}
+.skill-cell:hover{background:rgba(201,169,110,0.06);}
+.sc-icon{font-size:26px;margin-bottom:16px;display:block;line-height:1;}
+.sc-name{font-size:14px;font-weight:600;color:var(--white);letter-spacing:0.02em;margin-bottom:6px;}
+.sc-level{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.06em;text-transform:uppercase;}
+.sc-bar{height:1px;background:rgba(255,255,255,0.08);margin-top:16px;position:relative;}
+.sc-fill{position:absolute;left:0;top:0;height:100%;background:var(--gold);animation:sfill 2s ease-out forwards;transform-origin:left;transform:scaleX(0);}
 @keyframes sfill{to{transform:scaleX(1)}}
-
-/* Projects */
-.projects-section{
-  border-top:1px solid rgba(255,255,255,0.08);
-}
-.projects-inner{
-  max-width:1300px;
-  margin:0 auto;
-  padding:120px 80px;
-}
-.projects-grid{
-  margin-top:60px;
-  display:flex;
-  flex-direction:column;
-  gap:1px;
-  background:rgba(255,255,255,0.06);
-}
-.proj-row{
-  display:grid;
-  grid-template-columns:80px 1fr 200px;
-  gap:0;
-  background:#000;
-  align-items:center;
-  padding:40px 0;
-  border-bottom:1px solid rgba(255,255,255,0.06);
-  text-decoration:none;
-  color:inherit;
-  transition:background 0.3s;
-  padding-left:40px;
-  padding-right:40px;
-}
-.proj-row:last-child{border-bottom:none}
-.proj-row:hover{background:rgba(255,255,255,0.02)}
-.proj-row:hover .pr-num{color:var(--gold)}
-.pr-num{
-  font-family:'Playfair Display',serif;
-  font-size:48px;
-  font-weight:700;
-  color:rgba(255,255,255,0.08);
-  line-height:1;
-  transition:color 0.3s;
-}
-.pr-main{padding:0 40px}
-.pr-tag{
-  font-size:9px;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:8px;
-}
-.pr-title{
-  font-family:'Playfair Display',serif;
-  font-size:22px;
-  font-weight:700;
-  color:var(--white);
-  margin-bottom:8px;
-  letter-spacing:-0.01em;
-}
-.pr-desc{
-  font-size:13px;
-  color:rgba(255,255,255,0.4);
-  line-height:1.6;
-  font-family:'Cormorant Garamond',serif;
-  font-size:15px;
-}
-.pr-meta{
-  text-align:right;
-}
-.pr-highlight{
-  font-family:'Playfair Display',serif;
-  font-size:28px;
-  font-weight:700;
-  color:var(--gold);
-  line-height:1;
-  margin-bottom:4px;
-}
-.pr-hl-label{
-  font-size:10px;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,0.3);
-}
-.pr-arrow{
-  font-size:18px;
-  color:rgba(255,255,255,0.2);
-  margin-top:12px;
-  display:block;
-  transition:color 0.3s,transform 0.3s;
-}
-.proj-row:hover .pr-arrow{color:var(--white);transform:translateX(4px)}
-
-/* Contact */
-#contact-section{
-  background:rgba(255,255,255,0.02);
-  border-top:1px solid rgba(255,255,255,0.08);
-  padding:120px 80px;
-  text-align:center;
-}
-.contact-inner-wrap{
-  max-width:700px;
-  margin:0 auto;
-}
-.contact-inner-wrap .about-label{justify-content:center}
-.contact-inner-wrap .about-label::before{display:none}
-.contact-heading{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(40px,6vw,72px);
-  font-weight:700;
-  line-height:1.1;
-  letter-spacing:-0.02em;
-  margin-bottom:24px;
-}
-.contact-sub{
-  font-family:'Cormorant Garamond',serif;
-  font-size:18px;
-  font-weight:300;
-  font-style:italic;
-  color:rgba(255,255,255,0.5);
-  margin-bottom:48px;
-  line-height:1.7;
-}
-.contact-email{
-  display:block;
-  font-family:'Playfair Display',serif;
-  font-size:clamp(18px,3vw,28px);
-  color:var(--gold);
-  text-decoration:none;
-  letter-spacing:0.02em;
-  margin-bottom:48px;
-  transition:color 0.3s;
-}
-.contact-email:hover{color:var(--white)}
-.contact-links{
-  display:flex;
-  justify-content:center;
-  gap:32px;
-}
-.cl-item{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:6px;
-  text-decoration:none;
-  color:rgba(255,255,255,0.4);
-  transition:color 0.3s;
-  font-size:11px;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-}
-.cl-item:hover{color:var(--white)}
-.cl-icon{font-size:18px;margin-bottom:4px}
-
-/* Footer */
-footer{
-  padding:24px 80px;
-  border-top:1px solid rgba(255,255,255,0.06);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:11px;
-  color:rgba(255,255,255,0.2);
-  letter-spacing:0.06em;
-}
-
-/* Reveal animations */
-.reveal{
-  opacity:0;
-  transform:translateY(32px);
-  transition:opacity 0.9s ease,transform 0.9s ease;
-}
-.reveal.in{opacity:1;transform:none}
-
+.projects-section{border-top:1px solid rgba(255,255,255,0.08);}
+.projects-inner{max-width:1300px;margin:0 auto;padding:120px 80px;}
+.projects-grid{margin-top:60px;display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,0.06);}
+.proj-row{display:grid;grid-template-columns:80px 1fr 200px;gap:0;background:#000;align-items:center;padding:40px;border-bottom:1px solid rgba(255,255,255,0.06);text-decoration:none;color:inherit;transition:background 0.3s;}
+.proj-row:last-child{border-bottom:none;}
+.proj-row:hover{background:rgba(255,255,255,0.02);}
+.proj-row:hover .pr-num{color:var(--gold);}
+.pr-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:rgba(255,255,255,0.08);line-height:1;transition:color 0.3s;}
+.pr-main{padding:0 40px;}
+.pr-tag{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.pr-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px;letter-spacing:-0.01em;}
+.pr-desc{font-size:15px;color:rgba(255,255,255,0.4);line-height:1.6;font-family:'Cormorant Garamond',serif;}
+.pr-meta{text-align:right;}
+.pr-highlight{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:4px;}
+.pr-hl-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+.pr-arrow{font-size:18px;color:rgba(255,255,255,0.2);margin-top:12px;display:block;transition:color 0.3s,transform 0.3s;}
+.proj-row:hover .pr-arrow{color:var(--white);transform:translateX(4px);}
+.certs-section{border-top:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.01);}
+.certs-inner{max-width:1300px;margin:0 auto;padding:120px 80px;}
+.certs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:60px;}
+.cert-card{border:1px solid rgba(255,255,255,0.08);padding:32px 28px;transition:border-color 0.3s,transform 0.3s;}
+.cert-card:hover{border-color:rgba(201,169,110,0.4);transform:translateY(-4px);}
+.cert-badge{font-size:32px;margin-bottom:16px;display:block;}
+.cert-name{font-size:14px;font-weight:600;color:var(--white);margin-bottom:8px;line-height:1.4;}
+.cert-org{font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.08em;text-transform:uppercase;}
+.cert-year{font-size:11px;color:var(--gold);margin-top:6px;}
+#contact-section{background:rgba(255,255,255,0.02);border-top:1px solid rgba(255,255,255,0.08);padding:120px 80px;text-align:center;}
+.contact-inner-wrap{max-width:700px;margin:0 auto;}
+.contact-inner-wrap .about-label{justify-content:center;}
+.contact-inner-wrap .about-label::before{display:none;}
+.contact-heading{font-family:'Playfair Display',serif;font-size:clamp(40px,6vw,72px);font-weight:700;line-height:1.1;letter-spacing:-0.02em;margin-bottom:24px;}
+.contact-sub{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;font-style:italic;color:rgba(255,255,255,0.5);margin-bottom:48px;line-height:1.7;}
+.contact-email{display:block;font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,28px);color:var(--gold);text-decoration:none;letter-spacing:0.02em;margin-bottom:48px;transition:color 0.3s;}
+.contact-email:hover{color:var(--white);}
+.contact-links{display:flex;justify-content:center;gap:32px;}
+.cl-item{display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:rgba(255,255,255,0.4);transition:color 0.3s;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;}
+.cl-item:hover{color:var(--white);}
+.cl-icon{font-size:18px;margin-bottom:4px;}
+footer{padding:24px 80px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:0.06em;}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.9s ease,transform 0.9s ease;}
+.reveal.in{opacity:1;transform:none;}
 @media(max-width:768px){
-  nav{padding:20px 24px}
-  .nav-links{display:none}
-  .hero-content{padding:0 24px 60px}
-  .section,#contact-section{padding:80px 24px}
-  #about{grid-template-columns:1fr;gap:48px}
-  .skills-grid{grid-template-columns:repeat(2,1fr)}
-  .proj-row{grid-template-columns:1fr;padding:24px}
-  .pr-num{display:none}
-  .pr-main{padding:0}
-  .pr-meta{text-align:left;margin-top:16px}
-  footer{flex-direction:column;gap:8px;padding:20px 24px;text-align:center}
-  .skills-inner,.projects-inner{padding:80px 24px}
+  nav{padding:20px 24px;}
+  .nav-links{display:none;}
+  .hero-content{padding:0 24px 60px;}
+  .section,#contact-section{padding:80px 24px;}
+  #about{grid-template-columns:1fr;gap:48px;}
+  .skills-grid{grid-template-columns:repeat(2,1fr);}
+  .certs-grid{grid-template-columns:repeat(2,1fr);}
+  .proj-row{grid-template-columns:1fr;padding:24px;}
+  .pr-num{display:none;}
+  .pr-main{padding:0;}
+  .pr-meta{text-align:left;margin-top:16px;}
+  footer{flex-direction:column;gap:8px;padding:20px 24px;text-align:center;}
+  .skills-inner,.projects-inner,.certs-inner{padding:80px 24px;}
 }
 </style>
 </head>
@@ -568,8 +134,6 @@ footer{
 <section id="hero">
   <canvas id="vizCanvas"></canvas>
   <div class="hero-overlay"></div>
-
-  <!-- Person silhouette SVG -->
   <div class="silhouette">
     <svg viewBox="0 0 200 600" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="100" cy="60" rx="35" ry="38" fill="rgba(255,255,255,0.12)"/>
@@ -579,20 +143,19 @@ footer{
       <path d="M 68 280 Q 60 380 58 480 Q 57 520 75 522 Q 90 524 92 480 Q 94 420 100 380 Q 106 420 108 480 Q 110 524 125 522 Q 142 520 142 480 Q 140 380 132 280 Z" fill="rgba(255,255,255,0.08)"/>
     </svg>
   </div>
-
   <nav>
     <div class="nav-name">Bhuvaneshwar Sannappareddy</div>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills-section">Skills</a></li>
       <li><a href="#projects-section">Projects</a></li>
+      <li><a href="#certs-section">Certifications</a></li>
       <li><a href="#contact-section">Contact</a></li>
     </ul>
     <a href="mailto:bhuvaneshwars934@gmail.com" class="nav-resume">Hire Me</a>
   </nav>
-
   <div class="hero-content">
-    <div class="hero-eyebrow">Business & Data Analyst</div>
+    <div class="hero-eyebrow">Business Analyst &amp; Data Analyst</div>
     <h1 class="hero-title" style="line-height:0.9">
       Bhuvaneshwar<br>
       <span class="italic-line" style="font-size:0.95em;line-height:0.9">Sannappareddy.</span>
@@ -607,21 +170,23 @@ footer{
       <a href="mailto:bhuvaneshwars934@gmail.com" class="ha-btn ha-ghost">Contact Me</a>
     </div>
   </div>
-
   <div class="scroll-indicator">
     <div class="scroll-bar"></div>
     <div class="scroll-text">Scroll</div>
   </div>
 </section>
 
+<!-- ABOUT -->
 <div class="section" id="about">
   <div class="about-left reveal">
     <div class="about-label">Profile</div>
     <h2 class="about-heading">Where Finance Meets Analytics</h2>
     <div class="about-text">
-      <p>I am a <strong>Business Analyst and Data Analyst</strong> with a rare combination — a Finance and Accounting degree paired with a Master of Business Analytics from the <strong>University of Dayton</strong>.</p>
-      <p>I have delivered real-world analytical solutions for <strong>Lithko Contracting</strong>, one of the largest concrete contractors in the United States — building 120+ forecasting models that achieved up to <strong>83.8% improvement</strong> over baseline predictions.</p>
-      <p>I bridge the gap between raw data and strategic decisions, translating complex analytical findings into clear business recommendations for leadership teams.</p>
+      <p>I am a <strong>Business Analyst, Data Analyst, and Financial Analyst</strong> with a Master of Business Analytics from the University of Dayton and a Bachelor of Commerce (B.Com) in Finance and Accounting from Ballari Business College.</p>
+      <p>My academic background combines business, finance, and analytics, allowing me to understand both the numbers behind business performance and the analytical methods used to drive strategic decisions. I have developed expertise in SQL, Python, Power BI, Tableau, Excel, Business Intelligence, Data Visualization, Forecasting, KPI Reporting, and Data Analytics.</p>
+      <p>During my graduate studies, I worked on a client-facing industry project with <strong>Lithko Contracting</strong>, where I analyzed economic and operational datasets to identify future construction growth opportunities and support long-term business planning. This experience strengthened my ability to gather business requirements, perform data analysis, build forecasting models, and communicate insights to stakeholders.</p>
+      <p>In addition to my industry project, I have completed projects in predictive analytics, customer churn analysis, business intelligence reporting, and financial analysis, applying data-driven approaches to solve real-world business problems.</p>
+      <p>I am passionate about transforming complex data into actionable business insights, improving business processes, and helping organizations make informed decisions through analytics and strategic thinking.</p>
     </div>
     <div class="status-strip">
       <div class="pulse"></div>
@@ -631,20 +196,20 @@ footer{
   <div class="about-right reveal" style="transition-delay:0.2s">
     <div class="stat-rows">
       <div class="stat-row">
-        <div class="stat-label-text">Models Built</div>
-        <div class="stat-value-text">120<small>+</small></div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-label-text">Best Model Lift</div>
-        <div class="stat-value-text">83.8<small>%</small></div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-label-text">GPA — MS Analytics</div>
-        <div class="stat-value-text">3.6<small>/4.0</small></div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-label-text">Real Projects</div>
+        <div class="stat-label-text">Industry Projects</div>
         <div class="stat-value-text">4<small>+</small></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label-text">Business Dashboards</div>
+        <div class="stat-value-text">10<small>+</small></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label-text">SQL &amp; Analytics</div>
+        <div class="stat-value-text">3<small>+</small></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label-text">Graduate GPA</div>
+        <div class="stat-value-text">3.6<small>/4.0</small></div>
       </div>
       <div class="stat-row">
         <div class="stat-label-text">Email</div>
@@ -658,63 +223,113 @@ footer{
   </div>
 </div>
 
+<!-- SKILLS -->
 <section class="skills-section" id="skills-section">
   <div class="skills-inner">
     <div class="about-label reveal">Technical Proficiency</div>
-    <h2 class="about-heading reveal" style="transition-delay:0.1s">Skills & Tools</h2>
+    <h2 class="about-heading reveal" style="transition-delay:0.1s">Skills &amp; Tools</h2>
     <div class="skills-grid reveal" style="transition-delay:0.2s">
       <div class="skill-cell">
-        <span class="sc-icon">🛢️</span>
+        <span class="sc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 10h8M8 14h5"/></svg>
+        </span>
+        <div class="sc-name">Business Analysis</div>
+        <div class="sc-level">Advanced</div>
+        <div class="sc-bar"><div class="sc-fill" style="width:92%"></div></div>
+      </div>
+      <div class="skill-cell">
+        <span class="sc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+        </span>
         <div class="sc-name">SQL</div>
         <div class="sc-level">Advanced</div>
-        <div class="sc-bar"><div class="sc-fill" style="width:95%"></div></div>
+        <div class="sc-bar"><div class="sc-fill" style="width:92%;animation-delay:0.1s"></div></div>
       </div>
       <div class="skill-cell">
-        <span class="sc-icon">🐍</span>
-        <div class="sc-name">Python & Pandas</div>
+        <span class="sc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
+        </span>
+        <div class="sc-name">Requirements Gathering</div>
         <div class="sc-level">Advanced</div>
-        <div class="sc-bar"><div class="sc-fill" style="width:88%;animation-delay:0.1s"></div></div>
+        <div class="sc-bar"><div class="sc-fill" style="width:90%;animation-delay:0.2s"></div></div>
       </div>
       <div class="skill-cell">
-        <span class="sc-icon">📊</span>
+        <span class="sc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        </span>
+        <div class="sc-name">KPI Reporting</div>
+        <div class="sc-level">Advanced</div>
+        <div class="sc-bar"><div class="sc-fill" style="width:90%;animation-delay:0.3s"></div></div>
+      </div>
+      <div class="skill-cell">
+        <span class="sc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </span>
         <div class="sc-name">Power BI</div>
-        <div class="sc-level">Expert</div>
-        <div class="sc-bar"><div class="sc-fill" style="width:92%;animation-delay:0.2s"></div></div>
-      </div>
-      <div class="skill-cell">
-        <span class="sc-icon">📈</span>
-        <div class="sc-name">R Language</div>
         <div class="sc-level">Advanced</div>
-        <div class="sc-bar"><div class="sc-fill" style="width:85%;animation-delay:0.3s"></div></div>
+        <div class="sc-bar"><div class="sc-fill" style="width:90%;animation-delay:0.4s"></div></div>
       </div>
       <div class="skill-cell">
-        <span class="sc-icon">🔷</span>
-        <div class="sc-name">Tableau</div>
-        <div class="sc-level">Expert</div>
-        <div class="sc-bar"><div class="sc-fill" style="width:88%;animation-delay:0.4s"></div></div>
-      </div>
-      <div class="skill-cell">
-        <span class="sc-icon">📗</span>
+        <span class="sc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+        </span>
         <div class="sc-name">Advanced Excel</div>
-        <div class="sc-level">Expert</div>
+        <div class="sc-level">Advanced</div>
         <div class="sc-bar"><div class="sc-fill" style="width:95%;animation-delay:0.5s"></div></div>
       </div>
       <div class="skill-cell">
-        <span class="sc-icon">🤖</span>
-        <div class="sc-name">Machine Learning</div>
-        <div class="sc-level">Proficient</div>
-        <div class="sc-bar"><div class="sc-fill" style="width:82%;animation-delay:0.6s"></div></div>
+        <span class="sc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12s1-2 4-2 4 2 4 2"/><path d="M9 9h.01M15 9h.01"/></svg>
+        </span>
+        <div class="sc-name">Python</div>
+        <div class="sc-level">Intermediate</div>
+        <div class="sc-bar"><div class="sc-fill" style="width:75%;animation-delay:0.6s"></div></div>
       </div>
       <div class="skill-cell">
-        <span class="sc-icon">💰</span>
+        <span class="sc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        </span>
+        <div class="sc-name">Tableau</div>
+        <div class="sc-level">Advanced</div>
+        <div class="sc-bar"><div class="sc-fill" style="width:88%;animation-delay:0.7s"></div></div>
+      </div>
+      <div class="skill-cell">
+        <span class="sc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </span>
         <div class="sc-name">Financial Analytics</div>
-        <div class="sc-level">Expert</div>
-        <div class="sc-bar"><div class="sc-fill" style="width:92%;animation-delay:0.7s"></div></div>
+        <div class="sc-level">Advanced</div>
+        <div class="sc-bar"><div class="sc-fill" style="width:90%;animation-delay:0.8s"></div></div>
+      </div>
+      <div class="skill-cell">
+        <span class="sc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        </span>
+        <div class="sc-name">Business Intelligence</div>
+        <div class="sc-level">Advanced</div>
+        <div class="sc-bar"><div class="sc-fill" style="width:88%;animation-delay:0.9s"></div></div>
+      </div>
+      <div class="skill-cell">
+        <span class="sc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </span>
+        <div class="sc-name">Stakeholder Management</div>
+        <div class="sc-level">Advanced</div>
+        <div class="sc-bar"><div class="sc-fill" style="width:88%;animation-delay:1.0s"></div></div>
+      </div>
+      <div class="skill-cell">
+        <span class="sc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </span>
+        <div class="sc-name">Data Visualization</div>
+        <div class="sc-level">Advanced</div>
+        <div class="sc-bar"><div class="sc-fill" style="width:90%;animation-delay:1.1s"></div></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section class="projects-section" id="projects-section">
   <div class="projects-inner">
     <div class="about-label reveal">Case Studies</div>
@@ -728,8 +343,10 @@ footer{
           <div class="pr-desc">Predicted construction demand across 5 sectors using 20+ economic indicators. Built 120+ R forecasting models for one of the largest concrete contractors in the US, enabling leadership to act 4–6 quarters in advance of market shifts.</div>
         </div>
         <div class="pr-meta">
-          <div class="pr-highlight">83.8%</div>
-          <div class="pr-hl-label">Best Model Lift</div>
+          <div class="pr-highlight">20+</div>
+          <div class="pr-hl-label">Economic Indicators</div>
+          <div class="pr-highlight" style="margin-top:12px;font-size:22px">5</div>
+          <div class="pr-hl-label">Sectors Analyzed</div>
           <span class="pr-arrow">→</span>
         </div>
       </a>
@@ -762,7 +379,7 @@ footer{
       <a href="https://github.com/Bhuvaneshwar-analyst-2026/tata-motors-fundamental-analysis" class="proj-row" target="_blank">
         <div class="pr-num">04</div>
         <div class="pr-main">
-          <div class="pr-tag">Financial Analytics · Excel · Python</div>
+          <div class="pr-tag">Financial Analytics · Fundamental Analysis</div>
           <div class="pr-title">Tata Motors Financial Performance Analysis</div>
           <div class="pr-desc">Comprehensive financial analysis of Tata Motors — revenue trends, profitability drivers, cost structure, and operational efficiency with executive-level dashboards.</div>
         </div>
@@ -776,6 +393,49 @@ footer{
   </div>
 </section>
 
+<!-- CERTIFICATIONS -->
+<section class="certs-section" id="certs-section">
+  <div class="certs-inner">
+    <div class="about-label reveal">Credentials</div>
+    <h2 class="about-heading reveal" style="transition-delay:0.1s">Certifications</h2>
+    <div class="certs-grid reveal" style="transition-delay:0.2s">
+      <div class="cert-card">
+        <span class="cert-badge">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </span>
+        <div class="cert-name">Oracle Cloud Infrastructure AI Foundations</div>
+        <div class="cert-org">Oracle Corporation</div>
+        <div class="cert-year">2025</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-badge">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+        </span>
+        <div class="cert-name">AWS Cloud Technical Essentials</div>
+        <div class="cert-org">Amazon Web Services</div>
+        <div class="cert-year">2024</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-badge">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>
+        </span>
+        <div class="cert-name">Google AI Fundamentals</div>
+        <div class="cert-org">Google</div>
+        <div class="cert-year">2024</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-badge">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+        </span>
+        <div class="cert-name">SQL for Data Science with Python</div>
+        <div class="cert-org">IBM</div>
+        <div class="cert-year">2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
 <section id="contact-section">
   <div class="contact-inner-wrap reveal">
     <div class="about-label">Get In Touch</div>
@@ -805,192 +465,92 @@ footer{
 </footer>
 
 <script>
-// Animated data viz canvas background
 const canvas = document.getElementById('vizCanvas');
 const ctx = canvas.getContext('2d');
-
-function resize(){
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-}
+function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;}
 resize();
-window.addEventListener('resize', resize);
-
-// Chart elements to draw
-const elements = [];
-
-// Bar charts
-function makeBarChart(x, y, w, h, color, delay){
-  return {type:'bars', x, y, w, h, color, delay,
-    bars: Array.from({length:8},()=>({h:Math.random()*0.7+0.2, alpha:0}))};
-}
-// Line charts
-function makeLineChart(x, y, w, h, color, delay){
-  const pts = Array.from({length:12},(_,i)=>({x:i/11, y:Math.random()*0.6+0.2}));
-  return {type:'line', x, y, w, h, color, pts, delay, alpha:0};
-}
-// Donut charts
-function makeDonut(x, y, r, color, delay){
-  return {type:'donut', x, y, r, color, delay, prog:0, value:Math.random()*0.5+0.3};
-}
-// Numbers
-function makeNumber(x, y, val, color, delay){
-  return {type:'number', x, y, val, color, delay, alpha:0};
-}
-
-// Create elements matching the screenshot feel
-const W = ()=>canvas.width, H = ()=>canvas.height;
-
-elements.push(makeBarChart(0.55, 0.05, 0.18, 0.35, 'rgba(220,80,80,0.7)', 0));
-elements.push(makeBarChart(0.74, 0.05, 0.12, 0.3, 'rgba(220,80,80,0.5)', 0.3));
-elements.push(makeLineChart(0.45, 0.05, 0.3, 0.22, 'rgba(180,180,220,0.6)', 0.5));
-elements.push(makeDonut(0.48, 0.55, 0.08, 'rgba(200,160,80,0.7)', 0.2));
-elements.push(makeDonut(0.62, 0.62, 0.06, 'rgba(180,180,220,0.6)', 0.5));
-elements.push(makeDonut(0.8, 0.45, 0.07, 'rgba(220,80,80,0.6)', 0.8));
-elements.push(makeNumber(0.5, 0.55, '38%', 'rgba(200,200,220,0.5)', 0.3));
-elements.push(makeNumber(0.62, 0.62, '48%', 'rgba(200,200,220,0.4)', 0.6));
-elements.push(makeNumber(0.78, 0.45, '19%', 'rgba(200,200,220,0.4)', 0.9));
-elements.push(makeLineChart(0.42, 0.35, 0.25, 0.2, 'rgba(100,160,220,0.5)', 0.7));
-// Scatter dots
-elements.push({type:'scatter', x:0.85, y:0.1, w:0.12, h:0.35, color:'rgba(200,200,255,0.35)', delay:0.4, dots:Array.from({length:25},()=>({x:Math.random(),y:Math.random(),r:Math.random()*2+1})), alpha:0});
-// Grid lines
-elements.push({type:'grid', x:0.43, y:0.05, w:0.55, h:0.88, delay:0, alpha:0});
-
-let t = 0;
-
+window.addEventListener('resize',resize);
+const elements=[];
+function makeBarChart(x,y,w,h,color,delay){return{type:'bars',x,y,w,h,color,delay,bars:Array.from({length:8},()=>({h:Math.random()*0.7+0.2,alpha:0}))};}
+function makeLineChart(x,y,w,h,color,delay){const pts=Array.from({length:12},(_,i)=>({x:i/11,y:Math.random()*0.6+0.2}));return{type:'line',x,y,w,h,color,pts,delay,alpha:0};}
+function makeDonut(x,y,r,color,delay){return{type:'donut',x,y,r,color,delay,prog:0,value:Math.random()*0.5+0.3};}
+function makeNumber(x,y,val,color,delay){return{type:'number',x,y,val,color,delay,alpha:0};}
+elements.push(makeBarChart(0.55,0.05,0.18,0.35,'rgba(220,80,80,0.7)',0));
+elements.push(makeBarChart(0.74,0.05,0.12,0.3,'rgba(220,80,80,0.5)',0.3));
+elements.push(makeLineChart(0.45,0.05,0.3,0.22,'rgba(180,180,220,0.6)',0.5));
+elements.push(makeDonut(0.48,0.55,0.08,'rgba(200,160,80,0.7)',0.2));
+elements.push(makeDonut(0.62,0.62,0.06,'rgba(180,180,220,0.6)',0.5));
+elements.push(makeDonut(0.8,0.45,0.07,'rgba(220,80,80,0.6)',0.8));
+elements.push(makeNumber(0.5,0.55,'38%','rgba(200,200,220,0.5)',0.3));
+elements.push(makeNumber(0.62,0.62,'48%','rgba(200,200,220,0.4)',0.6));
+elements.push(makeNumber(0.78,0.45,'19%','rgba(200,200,220,0.4)',0.9));
+elements.push(makeLineChart(0.42,0.35,0.25,0.2,'rgba(100,160,220,0.5)',0.7));
+elements.push({type:'scatter',x:0.85,y:0.1,w:0.12,h:0.35,color:'rgba(200,200,255,0.35)',delay:0.4,dots:Array.from({length:25},()=>({x:Math.random(),y:Math.random(),r:Math.random()*2+1})),alpha:0});
+elements.push({type:'grid',x:0.43,y:0.05,w:0.55,h:0.88,delay:0,alpha:0});
+let t=0;
 function draw(){
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  t += 0.008;
-
-  // Background radial gradient
-  const grad = ctx.createRadialGradient(canvas.width*0.75, canvas.height*0.5, 0, canvas.width*0.75, canvas.height*0.5, canvas.width*0.6);
-  grad.addColorStop(0, 'rgba(15,20,40,0.9)');
-  grad.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  elements.forEach(el => {
-    const targetAlpha = 1;
-    if(el.type === 'grid'){
-      el.alpha = Math.min(1, el.alpha + 0.003);
-      ctx.save();
-      ctx.strokeStyle = `rgba(100,120,180,${0.08 * el.alpha})`;
-      ctx.lineWidth = 0.5;
-      const gx = el.x * canvas.width, gy = el.y * canvas.height;
-      const gw = el.w * canvas.width, gh = el.h * canvas.height;
-      const cols = 10, rows = 8;
-      for(let i=0;i<=cols;i++){
-        const x = gx + i*gw/cols;
-        ctx.beginPath();ctx.moveTo(x,gy);ctx.lineTo(x,gy+gh);ctx.stroke();
-      }
-      for(let i=0;i<=rows;i++){
-        const y = gy + i*gh/rows;
-        ctx.beginPath();ctx.moveTo(gx,y);ctx.lineTo(gx+gw,y);ctx.stroke();
-      }
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  t+=0.008;
+  const grad=ctx.createRadialGradient(canvas.width*0.75,canvas.height*0.5,0,canvas.width*0.75,canvas.height*0.5,canvas.width*0.6);
+  grad.addColorStop(0,'rgba(15,20,40,0.9)');
+  grad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=grad;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  elements.forEach(el=>{
+    if(el.type==='grid'){
+      el.alpha=Math.min(1,el.alpha+0.003);
+      ctx.save();ctx.strokeStyle=`rgba(100,120,180,${0.08*el.alpha})`;ctx.lineWidth=0.5;
+      const gx=el.x*canvas.width,gy=el.y*canvas.height,gw=el.w*canvas.width,gh=el.h*canvas.height;
+      for(let i=0;i<=10;i++){const x=gx+i*gw/10;ctx.beginPath();ctx.moveTo(x,gy);ctx.lineTo(x,gy+gh);ctx.stroke();}
+      for(let i=0;i<=8;i++){const y=gy+i*gh/8;ctx.beginPath();ctx.moveTo(gx,y);ctx.lineTo(gx+gw,y);ctx.stroke();}
       ctx.restore();
-    }
-    else if(el.type === 'bars'){
-      el.bars.forEach(b=>{ b.alpha = Math.min(1, b.alpha + 0.01); });
+    }else if(el.type==='bars'){
+      el.bars.forEach(b=>{b.alpha=Math.min(1,b.alpha+0.01);});
       ctx.save();
-      const bx = el.x*canvas.width, by = el.y*canvas.height;
-      const bw = el.w*canvas.width, bh = el.h*canvas.height;
-      const barW = bw / el.bars.length * 0.7;
-      const gap = bw / el.bars.length;
+      const bx=el.x*canvas.width,by=el.y*canvas.height,bw=el.w*canvas.width,bh=el.h*canvas.height;
+      const barW=bw/el.bars.length*0.7,gap=bw/el.bars.length;
       el.bars.forEach((b,i)=>{
-        const barH = bh * b.h;
-        const alpha = b.alpha * 0.8;
-        ctx.fillStyle = el.color.replace('0.7', alpha.toString());
-        ctx.fillRect(bx + i*gap, by + bh - barH, barW, barH);
-        // Highlight top
-        ctx.fillStyle = `rgba(255,255,255,${alpha*0.3})`;
-        ctx.fillRect(bx + i*gap, by + bh - barH, barW, 1);
-      });
-      ctx.restore();
-    }
-    else if(el.type === 'line'){
-      el.alpha = Math.min(1, el.alpha + 0.005);
+        const barH=bh*b.h,alpha=b.alpha*0.8;
+        ctx.fillStyle=el.color.replace('0.7',alpha.toString());
+        ctx.fillRect(bx+i*gap,by+bh-barH,barW,barH);
+        ctx.fillStyle=`rgba(255,255,255,${alpha*0.3})`;
+        ctx.fillRect(bx+i*gap,by+bh-barH,barW,1);
+      });ctx.restore();
+    }else if(el.type==='line'){
+      el.alpha=Math.min(1,el.alpha+0.005);
       ctx.save();
-      const lx = el.x*canvas.width, ly = el.y*canvas.height;
-      const lw = el.w*canvas.width, lh = el.h*canvas.height;
-      ctx.strokeStyle = el.color.replace('0.6', (el.alpha*0.6).toString());
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      const wave = Math.sin(t + el.delay*3) * 0.03;
-      el.pts.forEach((p,i)=>{
-        const px = lx + p.x*lw;
-        const py = ly + (p.y + wave)*lh;
-        if(i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
-      });
+      const lx=el.x*canvas.width,ly=el.y*canvas.height,lw=el.w*canvas.width,lh=el.h*canvas.height;
+      ctx.strokeStyle=el.color.replace('0.6',(el.alpha*0.6).toString());
+      ctx.lineWidth=1.5;ctx.beginPath();
+      const wave=Math.sin(t+el.delay*3)*0.03;
+      el.pts.forEach((p,i)=>{const px=lx+p.x*lw,py=ly+(p.y+wave)*lh;if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);});
       ctx.stroke();
-      // Fill area
-      ctx.lineTo(lx + lw, ly + lh);
-      ctx.lineTo(lx, ly + lh);
-      ctx.closePath();
-      ctx.fillStyle = el.color.replace('0.6', (el.alpha*0.1).toString());
-      ctx.fill();
-      // Dots on line
-      el.pts.forEach(p=>{
-        const px = lx + p.x*lw;
-        const py = ly + (p.y + wave)*lh;
-        ctx.beginPath();
-        ctx.arc(px,py,2,0,Math.PI*2);
-        ctx.fillStyle = el.color.replace('0.6',(el.alpha*0.8).toString());
-        ctx.fill();
-      });
+      ctx.lineTo(lx+lw,ly+lh);ctx.lineTo(lx,ly+lh);ctx.closePath();
+      ctx.fillStyle=el.color.replace('0.6',(el.alpha*0.1).toString());ctx.fill();
+      el.pts.forEach(p=>{const px=lx+p.x*lw,py=ly+(p.y+wave)*lh;ctx.beginPath();ctx.arc(px,py,2,0,Math.PI*2);ctx.fillStyle=el.color.replace('0.6',(el.alpha*0.8).toString());ctx.fill();});
       ctx.restore();
-    }
-    else if(el.type === 'donut'){
-      el.prog = Math.min(el.value, el.prog + 0.006);
+    }else if(el.type==='donut'){
+      el.prog=Math.min(el.value,el.prog+0.006);
       ctx.save();
-      const dx = el.x*canvas.width, dy = el.y*canvas.height;
-      const r = el.r * Math.min(canvas.width, canvas.height);
-      // Background circle
-      ctx.beginPath();
-      ctx.arc(dx,dy,r,0,Math.PI*2);
-      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
-      ctx.lineWidth = r*0.3;
-      ctx.stroke();
-      // Progress arc
-      ctx.beginPath();
-      ctx.arc(dx,dy,r,-Math.PI/2,-Math.PI/2 + Math.PI*2*el.prog);
-      ctx.strokeStyle = el.color;
-      ctx.lineWidth = r*0.3;
-      ctx.lineCap = 'round';
-      ctx.stroke();
+      const dx=el.x*canvas.width,dy=el.y*canvas.height,r=el.r*Math.min(canvas.width,canvas.height);
+      ctx.beginPath();ctx.arc(dx,dy,r,0,Math.PI*2);ctx.strokeStyle='rgba(255,255,255,0.06)';ctx.lineWidth=r*0.3;ctx.stroke();
+      ctx.beginPath();ctx.arc(dx,dy,r,-Math.PI/2,-Math.PI/2+Math.PI*2*el.prog);ctx.strokeStyle=el.color;ctx.lineWidth=r*0.3;ctx.lineCap='round';ctx.stroke();
       ctx.restore();
-    }
-    else if(el.type === 'number'){
-      el.alpha = Math.min(0.5, el.alpha + 0.004);
+    }else if(el.type==='number'){
+      el.alpha=Math.min(0.5,el.alpha+0.004);
+      ctx.save();ctx.font=`bold ${canvas.width*0.018}px Inter,sans-serif`;ctx.fillStyle=el.color.replace('0.5',el.alpha.toString());ctx.textAlign='center';ctx.fillText(el.val,el.x*canvas.width,el.y*canvas.height);ctx.restore();
+    }else if(el.type==='scatter'){
+      el.alpha=Math.min(1,el.alpha+0.004);
       ctx.save();
-      ctx.font = `bold ${canvas.width*0.018}px Inter,sans-serif`;
-      ctx.fillStyle = el.color.replace('0.5', el.alpha.toString());
-      ctx.textAlign = 'center';
-      ctx.fillText(el.val, el.x*canvas.width, el.y*canvas.height);
-      ctx.restore();
-    }
-    else if(el.type === 'scatter'){
-      el.alpha = Math.min(1, el.alpha + 0.004);
-      ctx.save();
-      const sx = el.x*canvas.width, sy = el.y*canvas.height;
-      const sw = el.w*canvas.width, sh = el.h*canvas.height;
-      el.dots.forEach(d=>{
-        ctx.beginPath();
-        ctx.arc(sx+d.x*sw, sy+d.y*sh, d.r, 0, Math.PI*2);
-        ctx.fillStyle = el.color.replace('0.35', (el.alpha*0.35).toString());
-        ctx.fill();
-      });
+      const sx=el.x*canvas.width,sy=el.y*canvas.height,sw=el.w*canvas.width,sh=el.h*canvas.height;
+      el.dots.forEach(d=>{ctx.beginPath();ctx.arc(sx+d.x*sw,sy+d.y*sh,d.r,0,Math.PI*2);ctx.fillStyle=el.color.replace('0.35',(el.alpha*0.35).toString());ctx.fill();});
       ctx.restore();
     }
   });
-
   requestAnimationFrame(draw);
 }
 draw();
-
-// Scroll reveal
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
-},{threshold:0.1});
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 </script>
 </body>
